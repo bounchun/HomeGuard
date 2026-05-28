@@ -240,3 +240,4 @@ if __name__ == "__main__":
 # Feature: Telegram alerts
 # Fix: database threading lock
 # Fix: camera lock between alerts
+# Fix: CPU temperature workaround
