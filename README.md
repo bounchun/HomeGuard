@@ -60,22 +60,23 @@ HomeGuard/
 ```
 
 
-## IoT Architecture
-![HomeGuard Architecture](docs/architecture.png)
-
 ## Screenshots
 
 ### Dashboard
-![HomeGuard Dashboard](docs/dashboard.png)
+![HomeGuard Dashboard](docs/HomeGuard-Dashboard.pdf)
 
 ### Telegram Alert
-![Telegram Alert](docs/telegram.png)
+![Telegram Alert](docs/Telegram-Alert.pdf)
 
 ### ThingSpeak
-![ThingSpeak](docs/thingspeak.png)
+![ThingSpeak](docs/ThinkSpeak.pdf)
 
 ### Camera Snapshot
-![Camera Snapshot](docs/snapshot.png)
+![Camera Snapshot - Lamp Off](docs/Camera_Snapshot_Lamp_Off.jpg)
+![Camera Snapshot - Lamp On](docs/Camera_Snapshot_Lamp_On.jpg)
+
+### Pi Setup
+![Pi Setup](docs/Pi_Setup.jpg)
 
 
 
