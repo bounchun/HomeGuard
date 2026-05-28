@@ -63,20 +63,23 @@ HomeGuard/
 ## Screenshots
 
 ### Dashboard
-![HomeGuard Dashboard](docs/HomeGuard-Dashboard.pdf)
+<img src="docs/homeguard_dashboard.png" width="600"/>
 
 ### Telegram Alert
-![Telegram Alert](docs/Telegram-Alert.pdf)
+<img src="docs/telegram-alert.png" width="400"/>
 
 ### ThingSpeak
-![ThingSpeak](docs/ThinkSpeak.pdf)
+<img src="docs/thinkspeak.png" width="600"/>
+
+### Raspberry Pi Setup
+<img src="docs/raspberry-pi-connect.png" width="400"/>
 
 ### Camera Snapshot
-![Camera Snapshot - Lamp Off](docs/Camera_Snapshot_Lamp_Off.jpg)
-![Camera Snapshot - Lamp On](docs/Camera_Snapshot_Lamp_On.jpg)
+<img src="docs/Camera_Snapshot_Lamp_Off.jpg" width="400"/>
+<img src="docs/Camera_Snapshot_Lamp_On.jpg" width="400"/>
 
 ### Pi Setup
-![Pi Setup](docs/Pi_Setup.jpg)
+<img src="docs/Pi_Setup.jpg" width="400"/>
 
 
 
