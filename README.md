@@ -73,4 +73,4 @@ HomeGuard/
 - See docs/installation_Guide.docx for full details
 
 ## Author
-HDip Computer Science — IoT Project 2026
+Boun Chun - HDip Computer Science — Computer Systems & Networks
