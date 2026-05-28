@@ -233,3 +233,4 @@ if __name__ == "__main__":
     scanner_thread = threading.Thread(target=background_scanner, daemon=True)
     scanner_thread.start()
     app.run(host="0.0.0.0", port=5000, debug=False)
+# Feature: network scanning
