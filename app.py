@@ -238,3 +238,4 @@ if __name__ == "__main__":
 # Feature: camera snapshot
 # Feature: ThingSpeak logging
 # Feature: Telegram alerts
+# Fix: database threading lock
