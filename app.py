@@ -235,3 +235,4 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=False)
 # Feature: network scanning
 # Feature: SenseHAT LED
+# Feature: camera snapshot
