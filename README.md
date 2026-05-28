@@ -63,6 +63,21 @@ HomeGuard/
 ## IoT Architecture
 ![HomeGuard Architecture](docs/architecture.png)
 
+## Screenshots
+
+### Dashboard
+![HomeGuard Dashboard](docs/dashboard.png)
+
+### Telegram Alert
+![Telegram Alert](docs/telegram.png)
+
+### ThingSpeak
+![ThingSpeak](docs/thingspeak.png)
+
+### Camera Snapshot
+![Camera Snapshot](docs/snapshot.png)
+
+
 
 ## Known Issues
 - SenseHAT humidity/temperature sensor not detected (I2C issue)
