@@ -6,7 +6,7 @@ A Raspberry Pi-based home network monitoring system that detects unknown devices
 - 📡 Scans home network every 30 seconds using ARP
 - 🔍 Detects and flags unknown MAC addresses
 - 📸 Captures camera snapshot when unknown device detected
-- 🔴 Flashes SenseHAT LED matrix red for 10 seconds on alert
+- 🔴 SenseHAT LED matrix flashes red on alert (verified via terminal output)
 - 📱 Sends Telegram notification to your phone
 - 🌡️ Logs CPU temperature to ThingSpeak cloud
 - 🗄️ Stores all events in SQLite database
