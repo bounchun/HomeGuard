@@ -16,7 +16,7 @@ A Raspberry Pi-based home network monitoring system that detects unknown devices
 ## Hardware Required
 - Raspberry Pi 4
 - Raspberry Pi SenseHAT
-- Raspberry Pi Camera Module (IMX708)
+- Raspberry Pi Camera Module 
 - MicroSD card and power supply
 - Home WiFi network
 
