@@ -57,15 +57,11 @@ HomeGuard/
 └── docs/
 └── installation_Guide.docx
 
-## IoT Architecture
 
-[Home Network Devices]
-↓ ARP Scan
-[Raspberry Pi 4]
-↓              ↓              ↓
-[Flask Dashboard] [ThingSpeak] [Telegram Bot]
-↓
-[SQLite Database]
+
+## IoT Architecture
+![HomeGuard Architecture](docs/architecture.png)
+
 
 ## Known Issues
 - SenseHAT humidity/temperature sensor not detected (I2C issue)
