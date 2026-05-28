@@ -1,0 +1,8 @@
+.env
+*.db
+static/snapshots/
+.venv/
+__pycache__/
+*.pyc
+*.jpg
+
