@@ -69,5 +69,37 @@ HomeGuard/
 - Workaround: CPU temperature used via vcgencmd measure_temp
 - See docs/installation_Guide.docx for full details
 
+
+## Learning Resources
+
+### Raspberry Pi & Hardware
+- [Raspberry Pi Official Documentation](https://www.raspberrypi.com/documentation/)
+- [SenseHAT API Reference](https://sense-hat.readthedocs.io/en/latest/)
+- [Picamera2 Documentation](https://datasheets.raspberrypi.com/camera/picamera2-manual.pdf)
+- [Raspberry Pi Camera Guide](https://www.raspberrypi.com/documentation/accessories/camera.html)
+
+### Python & Flask
+- [Flask Official Documentation](https://flask.palletsprojects.com/)
+- [Python SQLite3 Documentation](https://docs.python.org/3/library/sqlite3.html)
+- [Python Threading Documentation](https://docs.python.org/3/library/threading.html)
+- [Python dotenv Documentation](https://pypi.org/project/python-dotenv/)
+
+### Networking & IoT
+- [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
+- [ARP Protocol Explained](https://www.fortinet.com/resources/cyberglossary/what-is-arp)
+- [MAC Address Guide](https://www.howtogeek.com/764272/what-is-a-mac-address-and-how-does-it-work/)
+
+### Cloud & Messaging
+- [ThingSpeak Documentation](https://www.mathworks.com/help/thingspeak/)
+- [Telegram Bot API Documentation](https://core.telegram.org/bots/api)
+- [ThingSpeak REST API Guide](https://www.mathworks.com/help/thingspeak/rest-api.html)
+
+### Tools Used
+- [Git and GitHub Guide](https://docs.github.com/en/get-started)
+- [systemd Service Guide](https://www.freedesktop.org/software/systemd/man/systemd.service.html)
+- [SQLite Browser](https://sqlitebrowser.org/)
+
+
+
 ## Author
 Boun Chun - HDip Computer Science — Computer Systems & Networks
