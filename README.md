@@ -44,8 +44,9 @@ sudo python3 app.py
 ```
 Access dashboard at `http://<raspberry-pi-ip>:5000`
 
-## Project Structure
 
+## Project Structure
+```
 HomeGuard/
 ├── app.py              # Main Flask application
 ├── requirements.txt    # Python dependencies
@@ -55,8 +56,8 @@ HomeGuard/
 ├── static/
 │   └── snapshots/      # Camera snapshots
 └── docs/
-└── installation_Guide.docx
-
+    └── installation_Guide.docx
+```
 
 
 ## IoT Architecture
