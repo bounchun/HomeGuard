@@ -1,0 +1,7 @@
+flask
+python-dotenv
+requests
+scapy
+sense-hat
+picamera2
+

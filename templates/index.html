@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeGuard Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; }
+        header { background: #16213e; padding: 20px; text-align: center; }
+        header h1 { color: #00d4ff; font-size: 2rem; }
+        header p { color: #aaa; font-size: 0.9rem; }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .section { background: #16213e; border-radius: 10px; padding: 20px; margin-bottom: 25px; }
+        .section h2 { color: #00d4ff; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #0f3460; color: #00d4ff; padding: 10px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #333; }
+        tr:hover { background: #0f3460; }
+        .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
+        .known { background: #1a5c38; color: #4cff91; }
+        .unknown { background: #5c1a1a; color: #ff4c4c; }
+        .refresh-btn { background: #00d4ff; color: #1a1a2e; border: none; padding: 8px 18px;
+                       border-radius: 5px; cursor: pointer; font-weight: bold; float: right; }
+        .refresh-btn:hover { background: #00aacc; }
+        .no-data { color: #aaa; text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏠 HomeGuard</h1>
+        <p id="last-updated">Loading...</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📡 Devices on Network
+                <button class="refresh-btn" onclick="loadData()">Refresh</button>
+            </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>IP Address</th>
+                        <th>MAC Address</th>
+                        <th>Status</th>
+                        <th>Last Seen</th>
+                    </tr>
+                </thead>
+                <tbody id="devices-table">
+                    <tr><td colspan="4" class="no-data">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ Recent Alerts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>MAC Address</th>
+                        <th>IP Address</th>
+                        <th>Snapshot</th>
+                    </tr>
+                </thead>
+                <tbody id="alerts-table">
+                    <tr><td colspan="4" class="no-data">No alerts yet</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function loadData() {
+            fetch("/api/devices")
+                .then(r => r.json())
+                .then(devices => {
+                    const tbody = document.getElementById("devices-table");
+                    if (devices.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" class="no-data">No devices found</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = devices.map(d => `
+                        <tr>
+                            <td>${d.ip}</td>
+                            <td>${d.mac}</td>
+                            <td><span class="badge ${d.status}">${d.status.toUpperCase()}</span></td>
+                            <td>${d.last_seen}</td>
+                        </tr>
+                    `).join("");
+                });
+
+            fetch("/api/alerts")
+                .then(r => r.json())
+                .then(alerts => {
+                    const tbody = document.getElementById("alerts-table");
+                    if (alerts.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="4" class="no-data">No alerts yet</td></tr>';
+                        return;
+                    }
+                    tbody.innerHTML = alerts.map(a => `
+                        <tr>
+                            <td>${a.timestamp}</td>
+                            <td>${a.mac}</td>
+                            <td>${a.ip}</td>
+                            <td>${a.snapshot ? '<a href="/' + a.snapshot + '" target="_blank">View</a>' : 'N/A'}</td>
+                        </tr>
+                    `).join("");
+                });
+
+            document.getElementById("last-updated").textContent =
+                "Last updated: " + new Date().toLocaleTimeString();
+        }
+
+        loadData();
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
+
