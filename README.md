@@ -59,6 +59,7 @@ HomeGuard/
 └── docs/
     └── installation_Guide.docx
 
+
 ```
 
 
@@ -82,6 +83,27 @@ HomeGuard/
 
 ### Telegram Alert
 <img src="docs/telegram-alert.png" width="400"/>
+
+## Network Topology (Packet Tracer)
+
+The HomeGuard network was designed and simulated in Cisco Packet Tracer before physical implementation, demonstrating the network architecture the Raspberry Pi operates within.
+
+### Topology Diagram
+![HomeGuard Network Topology](docs/topology.png)
+
+| Device | IP Address | Role |
+|---|---|---|
+| HomeRouter | 192.168.1.1 | Default gateway |
+| Raspberry Pi | 192.168.1.17 | Network scanner (HomeGuard) |
+| PC1–PC5 | 192.168.1.10–.14 | Known/whitelisted devices |
+| Laptop | 192.168.1.99 | Unknown/intruder device |
+
+### Connectivity Test
+The Raspberry Pi successfully pinged all devices on the network, confirming it can detect every device including the unknown intruder laptop — exactly how HomeGuard's ARP scanner works in production.
+
+![Ping Test Results](docs/ping-test.png)
+
+> Packets: Sent = 4, Received = 4, Lost = 0 (0% loss) for all devices
 
 
 ## Design Decisions
