@@ -97,7 +97,7 @@ HomeGuard/
 ├── static/
 │   └── snapshots/          # Camera snapshots
 └── docs/
-    ├── installation_Guide.docx   # Full setup instructions
+    ├── installation_guide.docx   # Full setup instructions
     ├── topology.png              # Packet Tracer network diagram
     ├── ping-test.png             # Connectivity test results
     └── MQTT.png                  # HiveMQ MQTT screenshot
