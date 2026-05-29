@@ -63,8 +63,10 @@ sudo python3 app.py
 Access dashboard at `http://<raspberry-pi-ip>:5000`
 
 ## Environment Variables
+
 Copy `.env.example` to `.env` and fill in your credentials:
 
+```env
 HOMEGUARD_SCAN_INTERVAL=30
 HOMEGUARD_UNKNOWN_THRESHOLD_SECONDS=120
 HOMEGUARD_NETWORK_CIDR=192.168.1.0/24
@@ -79,6 +81,7 @@ HIVEMQ_BROKER=your-cluster.s1.eu.hivemq.cloud
 HIVEMQ_PORT=8883
 HIVEMQ_USER=your-username
 HIVEMQ_PASS=your-password
+```
 
 
 ## Project Structure
