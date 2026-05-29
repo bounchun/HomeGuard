@@ -11,6 +11,7 @@ A Raspberry Pi-based home network monitoring system that detects unknown devices
 - 🔴 SenseHAT LED matrix flashes red on alert (verified via terminal output)
 - 📱 Sends Telegram notification to your phone
 - 🌡️ Logs CPU temperature to ThingSpeak cloud
+- 📨 Publishes scan events to HiveMQ Cloud via MQTT over TLS
 - 🗄️ Stores all events in SQLite database
 - 🌐 Flask web dashboard accessible on local network
 - ⚙️ Auto-starts on boot via systemd
@@ -35,13 +36,17 @@ A Raspberry Pi-based home network monitoring system that detects unknown devices
 | MQTT Broker | HiveMQ Cloud |
 | MQTT Client | Paho MQTT (Python) |
 
+## Communication Methods
+
+HomeGuard uses two communication methods running in parallel on every scan cycle:
+
 | Method | Protocol | Destination | Data |
 |---|---|---|---|
 | REST | HTTP | ThingSpeak API | Temperature, device count, alert status |
 | REST | HTTP | Telegram Bot API | Alert notifications with snapshot |
 | MQTT | MQTT over TLS | HiveMQ Cloud | Full scan results (devices, unknown count, temperature) |
 
-Every 30 seconds the scanner publishes to both REST endpoints and the MQTT broker simultaneously, demonstrating multiple communication methods.
+Every 30 seconds the scanner publishes to both REST endpoints and the MQTT broker simultaneously.
 
 
 ## Quick Start
@@ -57,12 +62,31 @@ sudo python3 app.py
 ```
 Access dashboard at `http://<raspberry-pi-ip>:5000`
 
+## Environment Variables
+Copy `.env.example` to `.env` and fill in your credentials:
+
+HOMEGUARD_SCAN_INTERVAL=30
+HOMEGUARD_UNKNOWN_THRESHOLD_SECONDS=120
+HOMEGUARD_NETWORK_CIDR=192.168.1.0/24
+THINGSPEAK_ENABLED=true
+THINGSPEAK_CHANNEL_ID=your-channel-id
+THINGSPEAK_WRITE_API_KEY=your-api-key
+TELEGRAM_ENABLED=true
+TELEGRAM_BOT_TOKEN=your-bot-token
+TELEGRAM_CHAT_ID=your-chat-id
+MQTT_ENABLED=true
+HIVEMQ_BROKER=your-cluster.s1.eu.hivemq.cloud
+HIVEMQ_PORT=8883
+HIVEMQ_USER=your-username
+HIVEMQ_PASS=your-password
+
 
 ## Project Structure
 ```
 
 HomeGuard/
 ├── app.py                  # Main Flask application
+├── mqtt_publisher.py       # MQTT publisher for HiveMQ Cloud
 ├── requirements.txt        # Python dependencies
 ├── .env.example            # Example config
 ├── index.html              # GitHub Pages website
@@ -71,10 +95,9 @@ HomeGuard/
 ├── static/
 │   └── snapshots/          # Camera snapshots
 └── docs/
-    ├── installation_Guide.docx   # Full setup instructions
-    ├── topology.png              # Packet Tracer network diagram
-    └── ping-test.png             # Connectivity test results
-
+├── installation_Guide.docx   # Full setup instructions
+├── topology.png              # Packet Tracer network diagram
+└── ping-test.png             # Connectivity test results
 
 ```
 
@@ -154,6 +177,7 @@ Both MQTT and REST run in parallel — REST for cloud logging and alerts, MQTT f
 ## Known Issues
 - SenseHAT humidity/temperature sensor not detected (I2C issue)
 - Workaround: CPU temperature used via vcgencmd measure_temp
+- MQTT publishes successfully from Pi but requires correct HiveMQ credentials in .env
 - See docs/installation_Guide.docx for full details
 
 
@@ -170,6 +194,12 @@ Both MQTT and REST run in parallel — REST for cloud logging and alerts, MQTT f
 - [Python SQLite3 Documentation](https://docs.python.org/3/library/sqlite3.html)
 - [Python Threading Documentation](https://docs.python.org/3/library/threading.html)
 - [Python dotenv Documentation](https://pypi.org/project/python-dotenv/)
+
+### Networking & IoT
+- [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
+- [Paho MQTT Documentation](https://eclipse.dev/paho/files/paho.mqtt.python/html/index.html)
+- [HiveMQ Cloud Documentation](https://docs.hivemq.com/hivemq-cloud/introduction.html)
+- [MQTT Protocol Guide](https://mqtt.org/)
 
 ### Networking & IoT
 - [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
