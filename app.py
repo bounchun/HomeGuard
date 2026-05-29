@@ -6,6 +6,7 @@ import requests
 from datetime import datetime
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
+import mqtt_publisher 
 from scapy.all import ARP, Ether, srp
 
 load_dotenv()
@@ -198,6 +199,7 @@ def background_scanner():
 
         alert_status = 1 if unknown_count > 0 else 0
         send_thingspeak(temp, humidity, len(devices), unknown_count, alert_status)
+        mqtt_publisher.publish_scan(devices, unknown_count, temp) 
 
         time.sleep(SCAN_INTERVAL)
 
