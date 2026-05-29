@@ -235,11 +235,4 @@ if __name__ == "__main__":
     scanner_thread = threading.Thread(target=background_scanner, daemon=True)
     scanner_thread.start()
     app.run(host="0.0.0.0", port=5000, debug=False)
-# Feature: network scanning
-# Feature: SenseHAT LED
-# Feature: camera snapshot
-# Feature: ThingSpeak logging
-# Feature: Telegram alerts
-# Fix: database threading lock
-# Fix: camera lock between alerts
-# Fix: CPU temperature workaround
+
