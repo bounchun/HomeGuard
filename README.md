@@ -127,7 +127,7 @@ HomeGuard/
 <img src="docs/telegram-alert.png" width="400"/>
 
 ### HiveMQ MQTT
-<img src="docs/hivemq.png" width="600"/> 
+<img src="docs/MQTT.png" width="600"/> 
 
 ## Network Topology (Packet Tracer)
 
