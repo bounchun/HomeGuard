@@ -107,7 +107,6 @@ HomeGuard/
 ### Networking & IoT
 - [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
 - [ARP Protocol Explained](https://www.fortinet.com/resources/cyberglossary/what-is-arp)
-- [MAC Address Guide](https://www.howtogeek.com/764272/what-is-a-mac-address-and-how-does-it-work/)
 
 ### Cloud & Messaging
 - [ThingSpeak Documentation](https://www.mathworks.com/help/thingspeak/)
