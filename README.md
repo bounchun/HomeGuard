@@ -48,17 +48,18 @@ Access dashboard at `http://<raspberry-pi-ip>:5000`
 ## Project Structure
 ```
 HomeGuard/
-├── app.py              # Main Flask application
-├── requirements.txt    # Python dependencies
-├── .env.example        # Example config
+├── app.py                  # Main Flask application
+├── requirements.txt        # Python dependencies
+├── .env.example            # Example config
+├── index.html              # GitHub Pages website
 ├── templates/
-│   └── index.html      # Web dashboard
+│   └── index.html          # Web dashboard
 ├── static/
-│   └── snapshots/      # Camera snapshots
+│   └── snapshots/          # Camera snapshots
 └── docs/
     └── installation_Guide.docx
-```
 
+```
 
 
 ## Screenshots
