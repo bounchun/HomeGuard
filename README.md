@@ -106,7 +106,6 @@ HomeGuard/
 
 ### Networking & IoT
 - [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
-- [ARP Protocol Explained](https://www.fortinet.com/resources/cyberglossary/what-is-arp)
 
 ### Cloud & Messaging
 - [ThingSpeak Documentation](https://www.mathworks.com/help/thingspeak/)
@@ -116,9 +115,7 @@ HomeGuard/
 ### Tools Used
 - [Git and GitHub Guide](https://docs.github.com/en/get-started)
 - [systemd Service Guide](https://www.freedesktop.org/software/systemd/man/systemd.service.html)
-- [SQLite Browser](https://sqlitebrowser.org/)
-
-
+  
 
 ## Author
 Boun Chun - HDip Computer Science — Computer Systems & Networks
