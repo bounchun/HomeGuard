@@ -1,5 +1,7 @@
 # HomeGuard 🏠
 
+> 🌐 **Live Project Website:** [bounchun.github.io/HomeGuard](https://bounchun.github.io/HomeGuard/)
+
 A Raspberry Pi-based home network monitoring system that detects unknown devices, captures snapshots, and sends real-time alerts.
 
 ## Features
