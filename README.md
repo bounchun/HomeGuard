@@ -89,8 +89,7 @@ HomeGuard/
 ### Why ThingSpeak instead of Blynk
 ThingSpeak is specifically designed for IoT data logging and visualisation
 with REST API support — ideal for sending sensor readings from a Raspberry Pi.
-ThingSpeak also integrates with MATLAB for data analysis. Blynk is more suited
-for controlling hardware remotely (buttons, sliders) — HomeGuard is a monitoring
+Blynk is more suited for controlling hardware remotely (buttons, sliders) — HomeGuard is a monitoring
 system, not a control system. ThingSpeak is also free for this use case without
 requiring a paid plan.
 
