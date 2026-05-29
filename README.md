@@ -199,10 +199,7 @@ Both MQTT and REST run in parallel — REST for cloud logging and alerts, MQTT f
 - [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
 - [Paho MQTT Documentation](https://eclipse.dev/paho/files/paho.mqtt.python/html/index.html)
 - [HiveMQ Cloud Documentation](https://docs.hivemq.com/hivemq-cloud/introduction.html)
-- [MQTT Protocol Guide](https://mqtt.org/)
-
-### Networking & IoT
-- [Scapy Documentation](https://scapy.readthedocs.io/en/latest/)
+- [MQTT Protocol Guide](https://mqtt.org/) 
 
 ### Cloud & Messaging
 - [ThingSpeak Documentation](https://www.mathworks.com/help/thingspeak/)
