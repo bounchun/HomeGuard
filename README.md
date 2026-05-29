@@ -85,22 +85,22 @@ HIVEMQ_PASS=your-password
 
 
 ## Project Structure
-```
 
+```
 HomeGuard/
 ├── app.py                  # Main Flask application
 ├── mqtt_publisher.py       # MQTT publisher for HiveMQ Cloud
 ├── requirements.txt        # Python dependencies
 ├── .env.example            # Example config
-├── index.html              # GitHub Pages website
-├── templates/
+├── index.html              # GitHub Pages websit
 │   └── index.html          # Web dashboard
 ├── static/
 │   └── snapshots/          # Camera snapshots
 └── docs/
-├── installation_Guide.docx   # Full setup instructions
-├── topology.png              # Packet Tracer network diagram
-└── ping-test.png             # Connectivity test results
+    ├── installation_Guide.docx   # Full setup instructions
+    ├── topology.png              # Packet Tracer network diagram
+    ├── ping-test.png             # Connectivity test results
+    └── MQTT.png                  # HiveMQ MQTT screenshot
 
 ```
 
