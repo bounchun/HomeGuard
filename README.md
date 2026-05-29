@@ -184,7 +184,7 @@ Both MQTT and REST run in parallel — REST for cloud logging and alerts, MQTT f
 - SenseHAT humidity/temperature sensor not detected (I2C issue)
 - Workaround: CPU temperature used via vcgencmd measure_temp
 - MQTT publishes successfully from Pi but requires correct HiveMQ credentials in .env
-- See docs/installation_Guide.docx for full details
+- See docs/installation_guide.docx for full details
 
 
 ## Learning Resources
