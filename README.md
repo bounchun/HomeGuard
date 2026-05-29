@@ -47,6 +47,7 @@ Access dashboard at `http://<raspberry-pi-ip>:5000`
 
 ## Project Structure
 ```
+
 HomeGuard/
 ├── app.py                  # Main Flask application
 ├── requirements.txt        # Python dependencies
@@ -57,7 +58,9 @@ HomeGuard/
 ├── static/
 │   └── snapshots/          # Camera snapshots
 └── docs/
-    └── installation_Guide.docx
+    ├── installation_Guide.docx   # Full setup instructions
+    ├── topology.png              # Packet Tracer network diagram
+    └── ping-test.png             # Connectivity test results
 
 
 ```
