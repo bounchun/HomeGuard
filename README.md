@@ -126,6 +126,9 @@ HomeGuard/
 ### Telegram Alert
 <img src="docs/telegram-alert.png" width="400"/>
 
+### HiveMQ MQTT
+<img src="docs/hivemq.png" width="600"/> 
+
 ## Network Topology (Packet Tracer)
 
 The HomeGuard network was designed and simulated in Cisco Packet Tracer before physical implementation, demonstrating the network architecture the Raspberry Pi operates within.
