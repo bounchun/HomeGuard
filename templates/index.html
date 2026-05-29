@@ -5,34 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeGuard Dashboard</title>
     <style>
+        /* ── Reset & Base ─────────────────────────────────────────────── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; }
+
+        /* ── Header ───────────────────────────────────────────────────── */
         header { background: #16213e; padding: 20px; text-align: center; }
         header h1 { color: #00d4ff; font-size: 2rem; }
         header p { color: #aaa; font-size: 0.9rem; }
+
+        /* ── Layout ───────────────────────────────────────────────────── */
         .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+
+        /* ── Section Cards ────────────────────────────────────────────── */
         .section { background: #16213e; border-radius: 10px; padding: 20px; margin-bottom: 25px; }
         .section h2 { color: #00d4ff; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 8px; }
+
+        /* ── Tables ───────────────────────────────────────────────────── */
         table { width: 100%; border-collapse: collapse; }
         th { background: #0f3460; color: #00d4ff; padding: 10px; text-align: left; }
         td { padding: 10px; border-bottom: 1px solid #333; }
         tr:hover { background: #0f3460; }
+
+        /* ── Status Badges ────────────────────────────────────────────── */
         .badge { padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; }
-        .known { background: #1a5c38; color: #4cff91; }
-        .unknown { background: #5c1a1a; color: #ff4c4c; }
+        .known { background: #1a5c38; color: #4cff91; }   /* Green = whitelisted device */
+        .unknown { background: #5c1a1a; color: #ff4c4c; } /* Red = unrecognised device */
+
+        /* ── Refresh Button ───────────────────────────────────────────── */
         .refresh-btn { background: #00d4ff; color: #1a1a2e; border: none; padding: 8px 18px;
                        border-radius: 5px; cursor: pointer; font-weight: bold; float: right; }
         .refresh-btn:hover { background: #00aacc; }
+
+        /* ── Empty State ──────────────────────────────────────────────── */
         .no-data { color: #aaa; text-align: center; padding: 20px; }
     </style>
 </head>
 <body>
+
+    <!-- ── Header ──────────────────────────────────────────────────────── -->
     <header>
         <h1>🏠 HomeGuard</h1>
-        <p id="last-updated">Loading...</p>
+        <p id="last-updated">Loading...</p> <!-- Updated by JS on each refresh -->
     </header>
 
     <div class="container">
+
+        <!-- ── Devices Section ─────────────────────────────────────────── -->
+        <!-- Shows all devices currently or recently seen on the network -->
         <div class="section">
             <h2>📡 Devices on Network
                 <button class="refresh-btn" onclick="loadData()">Refresh</button>
@@ -42,16 +62,19 @@
                     <tr>
                         <th>IP Address</th>
                         <th>MAC Address</th>
-                        <th>Status</th>
+                        <th>Status</th>    <!-- KNOWN (green) or UNKNOWN (red) -->
                         <th>Last Seen</th>
                     </tr>
                 </thead>
+                <!-- Populated dynamically by loadData() via /api/devices -->
                 <tbody id="devices-table">
                     <tr><td colspan="4" class="no-data">Loading...</td></tr>
                 </tbody>
             </table>
         </div>
 
+        <!-- ── Alerts Section ──────────────────────────────────────────── -->
+        <!-- Shows the 20 most recent unknown device alert events -->
         <div class="section">
             <h2>⚠️ Recent Alerts</h2>
             <table>
@@ -60,9 +83,10 @@
                         <th>Time</th>
                         <th>MAC Address</th>
                         <th>IP Address</th>
-                        <th>Snapshot</th>
+                        <th>Snapshot</th> <!-- Link to camera image if captured -->
                     </tr>
                 </thead>
+                <!-- Populated dynamically by loadData() via /api/alerts -->
                 <tbody id="alerts-table">
                     <tr><td colspan="4" class="no-data">No alerts yet</td></tr>
                 </tbody>
@@ -117,4 +141,3 @@
     </script>
 </body>
 </html>
-
