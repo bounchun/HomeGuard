@@ -5,43 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomeGuard - Home Network Monitor</title>
     <style>
+        /* ── Reset & Base ─────────────────────────────────────────────── */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #1a1a2e; color: #eee; }
+
+        /* ── Header ───────────────────────────────────────────────────── */
         header { background: #16213e; padding: 40px 20px; text-align: center; }
         header h1 { color: #00d4ff; font-size: 2.5rem; margin-bottom: 10px; }
         header p { color: #aaa; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
+        /* ── Layout ───────────────────────────────────────────────────── */
         .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+        /* ── Section Cards ────────────────────────────────────────────── */
         .section { background: #16213e; border-radius: 10px; padding: 30px; margin-bottom: 30px; }
         .section h2 { color: #00d4ff; margin-bottom: 20px; font-size: 1.5rem; }
+
+        /* ── Feature Grid ─────────────────────────────────────────────── */
         .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
         .feature { background: #0f3460; border-radius: 8px; padding: 15px; }
         .feature h3 { color: #00d4ff; margin-bottom: 8px; font-size: 1rem; }
         .feature p { color: #aaa; font-size: 0.9rem; }
+
+        /* ── Screenshots Grid ─────────────────────────────────────────── */
         .screenshots { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
         .screenshot img { width: 100%; border-radius: 8px; border: 1px solid #0f3460; }
         .screenshot p { color: #aaa; text-align: center; margin-top: 8px; font-size: 0.9rem; }
+
+        /* ── Software Stack Badges ────────────────────────────────────── */
         .stack { display: flex; flex-wrap: wrap; gap: 10px; }
         .badge { background: #0f3460; color: #00d4ff; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; }
+
+        /* ── Buttons ──────────────────────────────────────────────────── */
         .btn { display: inline-block; background: #00d4ff; color: #1a1a2e; padding: 12px 24px;
                border-radius: 6px; text-decoration: none; font-weight: bold; margin: 5px; }
         .btn:hover { background: #00aacc; }
-        .btn.outline { background: transparent; color: #00d4ff; border: 2px solid #00d4ff; }
+        .btn.outline { background: transparent; color: #00d4ff; border: 2px solid #00d4ff; } /* Ghost button */
+
+        /* ── Architecture Diagram ─────────────────────────────────────── */
         .architecture img { width: 100%; border-radius: 8px; }
+
+        /* ── Footer ───────────────────────────────────────────────────── */
         footer { text-align: center; padding: 30px; color: #aaa; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
+<!-- ── Header ────────────────────────────────────────────────────────────── -->
 <header>
     <h1>🏠 HomeGuard</h1>
     <p>A Raspberry Pi-based home network monitoring system that detects unknown devices, captures snapshots, and sends real-time alerts.</p>
     <br>
+    <!-- Links to GitHub repo and installation guide -->
     <a href="https://github.com/bounchun/HomeGuard" class="btn">View on GitHub</a>
     <a href="https://github.com/bounchun/HomeGuard/blob/main/docs/installation_Guide.docx" class="btn outline">Installation Guide</a>
 </header>
 
 <div class="container">
 
+    <!-- ── Features Section ────────────────────────────────────────────── -->
+    <!-- Grid of feature cards — each card describes one HomeGuard capability -->
     <div class="section">
         <h2>⚡ Features</h2>
         <div class="features">
@@ -69,13 +92,22 @@
                 <h3>🌡️ Cloud Logging</h3>
                 <p>Logs CPU temperature and device counts to ThingSpeak IoT platform.</p>
             </div>
+            <!-- Release 4 features -->
+            <div class="feature">
+                <h3>📨 MQTT Publishing</h3>
+                <p>Publishes scan events to HiveMQ Cloud via MQTT over TLS on every scan cycle.</p>
+            </div>
+            <div class="feature">
+                <h3>⚙️ Configurable Settings</h3>
+                <p>Scan interval, alert threshold, and service toggles editable via the web dashboard.</p>
+            </div>
             <div class="feature">
                 <h3>🗄️ SQLite Database</h3>
                 <p>Stores all scan events and alerts locally in a SQLite database.</p>
             </div>
             <div class="feature">
                 <h3>🌐 Web Dashboard</h3>
-                <p>Flask web dashboard showing all devices and alerts on local network.</p>
+                <p>Flask web dashboard showing all devices, alerts, and settings on local network.</p>
             </div>
             <div class="feature">
                 <h3>⚙️ Auto-Start</h3>
@@ -84,6 +116,8 @@
         </div>
     </div>
 
+    <!-- ── Architecture Section ────────────────────────────────────────── -->
+    <!-- System diagram showing how all components connect -->
     <div class="section">
         <h2>🏗️ Architecture</h2>
         <div class="architecture">
@@ -91,6 +125,8 @@
         </div>
     </div>
 
+    <!-- ── Screenshots Section ─────────────────────────────────────────── -->
+    <!-- Visual evidence of the system running — dashboard, alerts, MQTT, camera -->
     <div class="section">
         <h2>📸 Screenshots</h2>
         <div class="screenshots">
@@ -106,6 +142,11 @@
                 <img src="docs/telegram-alert.png" alt="Telegram Alert"/>
                 <p>Telegram Alert</p>
             </div>
+            <!-- MQTT screenshot added for Release 4 -->
+            <div class="screenshot">
+                <img src="docs/MQTT.png" alt="HiveMQ MQTT"/>
+                <p>HiveMQ MQTT Publishing</p>
+            </div>
             <div class="screenshot">
                 <img src="docs/Camera_Snapshot_Lamp_On.jpg" alt="Camera Snapshot"/>
                 <p>Camera Snapshot</p>
@@ -117,6 +158,8 @@
         </div>
     </div>
 
+    <!-- ── Software Stack Section ──────────────────────────────────────── -->
+    <!-- Badge list of all technologies used in the project -->
     <div class="section">
         <h2>🛠️ Software Stack</h2>
         <div class="stack">
@@ -126,6 +169,9 @@
             <span class="badge">Scapy</span>
             <span class="badge">ThingSpeak API</span>
             <span class="badge">Telegram Bot API</span>
+            <!-- Added for Release 4 MQTT feature -->
+            <span class="badge">Paho MQTT</span>
+            <span class="badge">HiveMQ Cloud</span>
             <span class="badge">Picamera2</span>
             <span class="badge">SenseHAT</span>
             <span class="badge">systemd</span>
@@ -133,9 +179,12 @@
         </div>
     </div>
 
+    <!-- ── Quick Start Section ─────────────────────────────────────────── -->
+    <!-- Install commands to get HomeGuard running on a fresh Pi -->
     <div class="section">
         <h2>🚀 Quick Start</h2>
         <p style="color:#aaa; margin-bottom:15px;">Clone the repo and follow the installation guide:</p>
+        <!-- Command block styled as a terminal -->
         <div style="background:#0f3460; padding:15px; border-radius:8px; font-family:monospace; color:#00d4ff;">
             git clone https://github.com/bounchun/HomeGuard.git<br>
             cd HomeGuard<br>
@@ -149,10 +198,10 @@
 
 </div>
 
+<!-- ── Footer ────────────────────────────────────────────────────────────── -->
 <footer>
     <p>HomeGuard — HDip Computer Science IoT Project 2026</p>
 </footer>
 
 </body>
 </html>
-
