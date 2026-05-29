@@ -84,6 +84,30 @@ HomeGuard/
 <img src="docs/telegram-alert.png" width="400"/>
 
 
+## Design Decisions
+
+### Why ThingSpeak instead of Blynk
+ThingSpeak is specifically designed for IoT data logging and visualisation
+with REST API support — ideal for sending sensor readings from a Raspberry Pi.
+ThingSpeak also integrates with MATLAB for data analysis. Blynk is more suited
+for controlling hardware remotely (buttons, sliders) — HomeGuard is a monitoring
+system, not a control system. ThingSpeak is also free for this use case without
+requiring a paid plan.
+
+### Why Telegram instead of Blynk notifications
+Telegram Bot API is free with no message limits and easy to set up with just
+a bot token and chat ID. It works on any device with Telegram installed.
+Blynk notifications require a paid plan for production use and are tied to
+the Blynk platform.
+
+### Why GitHub Pages instead of Render or Cloudinary
+GitHub Pages is free and permanently hosted, directly linked to the source
+code repository with no separate deployment needed. Render is better suited
+for hosting dynamic web apps with databases — HomeGuard's Flask dashboard
+runs locally on the Pi, not on a server. Cloudinary is a media hosting
+service, not relevant for a project website. GitHub Pages is simpler and
+sufficient for a static project showcase website.
+
 
 ## Known Issues
 - SenseHAT humidity/temperature sensor not detected (I2C issue)
