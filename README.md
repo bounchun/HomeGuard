@@ -32,6 +32,17 @@ A Raspberry Pi-based home network monitoring system that detects unknown devices
 | Alerts | Telegram Bot API |
 | Hardware | SenseHAT, Picamera2 |
 | OS Service | systemd |
+| MQTT Broker | HiveMQ Cloud |
+| MQTT Client | Paho MQTT (Python) |
+
+| Method | Protocol | Destination | Data |
+|---|---|---|---|
+| REST | HTTP | ThingSpeak API | Temperature, device count, alert status |
+| REST | HTTP | Telegram Bot API | Alert notifications with snapshot |
+| MQTT | MQTT over TLS | HiveMQ Cloud | Full scan results (devices, unknown count, temperature) |
+
+Every 30 seconds the scanner publishes to both REST endpoints and the MQTT broker simultaneously, demonstrating multiple communication methods.
+
 
 ## Quick Start
 ```bash
@@ -134,6 +145,11 @@ runs locally on the Pi, not on a server. Cloudinary is a media hosting
 service, not relevant for a project website. GitHub Pages is simpler and
 sufficient for a static project showcase website.
 
+### Why MQTT alongside REST
+MQTT is a lightweight publish/subscribe protocol designed for IoT devices — ideal for a Raspberry Pi sending frequent scan events. 
+Unlike REST (request/response), MQTT decouples the publisher from subscribers, meaning any number of clients can receive scan data without the Pi knowing about them. 
+HiveMQ Cloud was chosen as the broker for its free tier, TLS support, and reliable cloud infrastructure. 
+Both MQTT and REST run in parallel — REST for cloud logging and alerts, MQTT for real-time event streaming.
 
 ## Known Issues
 - SenseHAT humidity/temperature sensor not detected (I2C issue)
