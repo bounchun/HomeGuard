@@ -29,7 +29,7 @@
         .feature-text p { color: #aaa; font-size: 0.8rem; line-height: 1.4; }
 
         /* ── Screenshots Grid ─────────────────────────────────────────── */
-        .screenshots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .screenshots { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .screenshot img { width: 100%; border-radius: 8px; border: 1px solid #0f3460; }
         .screenshot p { color: #aaa; text-align: center; margin-top: 6px; font-size: 0.8rem; }
 
@@ -93,7 +93,6 @@
                 <div class="feature-icon">🌡️</div>
                 <div class="feature-text"><h3>Cloud Logging</h3><p>Logs CPU temperature and device counts to ThingSpeak IoT platform.</p></div>
             </div>
-            <!-- Release 4 features -->
             <div class="feature">
                 <div class="feature-icon">📨</div>
                 <div class="feature-text"><h3>MQTT Publishing</h3><p>Publishes scan events to HiveMQ Cloud via MQTT over TLS.</p></div>
