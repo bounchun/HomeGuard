@@ -115,7 +115,10 @@ HomeGuard/
 
 ### Camera Snapshot
 <img src="docs/Camera_Snapshot_Lamp_Off.jpg" width="400"/>
-<img src="docs/Camera_Snapshot_Lamp_On.jpg" width="400"/>
+<img src="docs/Camera_Snapshot_Lamp_On.jpg" width="400"/> 
+
+### SenseHAT Terminal Output
+<img src="docs/sensehat_flash_red.png" width="600"/> 
 
 ### Dashboard
 <img src="docs/homeguard_dashboard.png" width="600"/>
