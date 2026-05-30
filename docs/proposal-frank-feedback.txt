@@ -1,0 +1,194 @@
+# PROJECT NAME
+# HOMEGUARD
+### 25/04/2026
+
+---
+
+**STUDENT NAME:** Boun Chun **STUDENT ID:**20118468 *
+
+
+**Git Repo:** https://github.com/bounchun/HomeGuard
+
+---
+
+I want to build a system that tells me exactly what devices are connected to my home network at any time, alerts me when an unknown device appears, and tracks when devices come and go. 
+
+My proposal is as follows:
+
+Using the MAC address and IP address of every device on the home network, the Raspberry Pi will continuously scan for connected devices. 
+When a new or unknown device is detected, it will notify me through a web dashboard and send a real-time alert to my phone via Telegram or email. 
+The **SenseHAT** LED matrix will flash red when an unknown device is found and return to green when the network is clear. 
+At the same moment, the **Camera Module** will capture a snapshot of the physical area near the router and attach it to the alert — so the homeowner can see if anyone is physically present near the network equipment. 
+A web dashboard will show a live list of all devices, their status (known / unknown / offline), camera snapshots linked to alert events, and a full history log of when each device was seen.
+SenseHAT environmental readings are simultaneously streamed to a **Blynk mobile dashboard** for real-time monitoring and to **ThingSpeak** for long-term data logging.
+
+
+---
+
+## 1. Project Background and Description
+
+> **HomeGuard** is a home network presence monitoring and intrusion detection system. The system has two primary purposes:
+>
+> **Use 1** — The purpose of this device is to alert a homeowner when an unknown or unauthorised device connects to their home Wi-Fi network. 
+>
+> **Use 2** — This system can also be used to track the presence of known household members by monitoring when their personal devices (phones, laptops) connect and disconnect from the network.
+>
+> HomeGuard records all device activity, camera snapshots on alert events, and environmental readings — all displayed on a live web dashboard.
+
+1. Raspberry Pi (with **SenseHAT** and **Camera Module** attached) is placed near the home router and runs a background scanner process. 
+   The SenseHAT displays a steady green LED pattern during normal operation and reads ambient temperature and humidity at each scan interval.
+
+2. Every 30 seconds, the scanner sends an ARP request across the network and collects the MAC address, IP address, and hostname of every responding device. 
+   This is bundled with the current SenseHAT readings and published as a structured JSON event via **MQTT**. 
+
+3. A backend service subscribed to the MQTT broker receives each event, stores it in a **SQLite database**, compares the MAC address against a persistent whitelist table, and classifies the device as **known**, **unknown**, or **offline**. 
+
+4. A **REST API** built in **Java (Spring Boot)** exposes the device data to the frontend — applying object-oriented design, RESTful controllers, and a service-layer architecture. 
+   The web dashboard — built with HTML, CSS, JavaScript, and Chart.js — fetches this data and renders live device lists, presence timeline charts, and environmental trend graphs. 
+
+5. If an unknown device is present for more than 2 minutes without acknowledgement, the **Camera Module** captures a timestamped snapshot, the **SenseHAT LED matrix flashes red**, and a **Telegram message** with the photo attached is sent to the homeowner along with an **email alert**. 
+
+
+**Notifications sent in the following scenario:**
+
+*If an unrecognised MAC address is detected on the network and has not been acknowledged by the homeowner within 2 minutes — a Telegram message with a camera snapshot attached is sent.*
+
+**Alert (Telegram message or email):**
+
+*If the unknown device remains connected and unacknowledged beyond the configured threshold, a follow-up alert is triggered and the SenseHAT continues to flash red until resolved.*
+
+---
+
+
+## 2. Tools, Technologies and Equipment
+
+### Hardware
+- Raspberry Pi 4
+- Raspberry Pi Camera Module — captures timestamped snapshots on alert trigger
+- Raspberry Pi SenseHAT — LED matrix status display + temperature/humidity sensor
+- Home Wi-Fi network (test environment)
+
+### Languages & Frameworks
+- **Python** — network scanner, MQTT publisher, Flask backend, Blynk client, Cloudinary upload, camera capture 
+- **Flask + Jinja2** — multi-page web app with HTML template rendering
+- **Java (Spring Boot)** — REST API backend, OOP service/repository architecture *
+- **JavaScript / Chart.js** — client-side data visualisation and interactive charts
+- **HTML / CSS** — responsive Flask HTML templates and dashboard frontend
+
+### Protocols & Networking
+- **MQTT** — publish device events from RPi to broker
+- **HTTP / REST** — API endpoints consumed by the dashboard
+- **WebSocket** — live dashboard updates without page refresh
+- **ARP / Layer 2** — network scanning 
+- **ThingSpeak REST API** — SenseHAT readings and device count published to ThingSpeak channel fields via HTTP GET requests; data retrievable via ThingSpeak JSON feed API for embedding charts
+
+### Database & Storage
+- **SQLite** — relational database for device events, alert log, and snapshot metadata
+- **SQL** — schema design, queries, joins, aggregations
+- **JSON** — structured message schema between all components
+
+### Cloud & DevOps 
+- **HiveMQ Cloud** — managed MQTT broker (free tier) 
+- **Render** — cloud deployment of Flask backend and dashboard 
+- **Cloudinary** — cloud media storage and CDN for Camera Module snapshots 
+- **Blynk** — mobile IoT dashboard platform for live SenseHAT readings and alerts 
+- **ThingSpeak** — IoT cloud platform for long-term time-series data logging; 
+- **Docker & Docker Compose** — containerised, one-command deployment
+- **GitHub Actions** — automated linting and basic tests
+
+### Alerting
+- **SMTP / SendGrid** — email notifications with camera snapshot attached
+- **Telegram Bot API** — real-time push alerts with photo to phone
+
+### Tools & IDEs
+- VS Code with Remote-SSH (develop directly on RPi)
+- **Cisco Packet Tracer** — network topology design, TCP/MQTT/UDP traffic simulation, architecture documentation
+- Postman — REST API testing
+- MQTT Explorer — broker debugging and monitoring
+- Git & GitHub — version control and project submission
+
+---
+
+
+## 3. System Architecture Overview
+
+### Data Sources 
+
+| Data Source | How It is Used |
+|---|---|
+| **SenseHAT** | Reads temperature and humidity every 30 seconds; LED matrix reflects system state (green = clear, red = alert) |
+| **Camera Module** | Captures a timestamped snapshot when an unknown device is detected and unacknowledged for >2 minutes; image uploaded to Cloudinary |
+| **Packet Tracer** | Used in two ways: (1) **Network design** — the full HomeGuard topology (RPi → switch → router → HiveMQ cloud broker → Render backend → client browser) is built and simulated in Packet Tracer before physical implementation, with MQTT and HTTP traffic flows modelled between nodes; 
+                                        (2) **Simulation** — the UDP GPS location feed and MQTT device event messages are prototyped in Packet Tracer to verify the network behaviour and packet flow before writing real Python code. |
+| **External API** | OpenWeatherMap API is polled every 10 minutes; outdoor temperature and weather condition are correlated with SenseHAT indoor readings and home occupancy patterns on the environment dashboard |
+
+---
+
+### Processing 
+
+| Processing Method | How It Is Used |
+|---|---|
+| **Threshold checks** | SenseHAT temperature above configurable limit → environmental warning logged; unknown device present >2 minutes → alert triggered; humidity outside normal range → flagged |
+| **Status calculation** | Every device is assigned a calculated status on each scan cycle: `known` (whitelisted MAC seen), `unknown` (MAC not in whitelist), `new` (first time seen), `offline` (previously seen, now absent); status transitions are tracked and stored |
+| **Event detection** | Camera Module motion detection triggers an event when movement is detected near the router; this is correlated with unknown device presence to strengthen alert confidence |
+| **Rules engine** | Configurable rules evaluated on every incoming MQTT event: unknown MAC → snapshot + email + Blynk alert; device offline >10 min → mark absent; temperature above threshold → environmental warning; movement detected + unknown device → high-confidence intruder alert |
+| **Data processing** | Running averages of temperature and humidity per 10-minute window; session duration per device (min, max, average); daily device count trends; peak occupancy hours derived from historical data; all surfaced on the environment and history dashboard pages |
+
+---
+
+### Networking 
+
+| Protocol / Technology | Role |
+|---|---|
+| **MQTT** (Paho Python) | RPi edge node publishes device scan events and SenseHAT readings to HiveMQ Cloud broker; Flask backend subscribes and ingests |
+| **HTTP / REST** | Flask REST API serves device data, event history, alerts, and snapshots to the web dashboard frontend via HTTP GET/POST routes |
+| **TCP** | Underlying transport for MQTT and HTTP/HTTPS; the TCP connection lifecycle between RPi, broker, and Flask backend is explicitly simulated and verified in Packet Tracer before physical implementation |
+| **UDP** | Used by the simulated GPS location feed (publishing coordinate packets over UDP for low-latency presence correlation); the UDP packet flow is first prototyped and verified in Packet Tracer before being implemented in Python |
+| **Blynk** | RPi Python Blynk client publishes live SenseHAT readings and alert flags to Blynk virtual pins over HTTPS; homeowner views live gauges on the Blynk mobile app |
+| **ThingSpeak** | RPi Python script publishes temperature, humidity, and device count to a **ThingSpeak channel** via HTTP REST API every 30 seconds; 
+    ThingSpeak stores long-term time-series data and renders MATLAB-powered analytics charts for historical trend analysis — complementing Blynk's real-time view with a long-term data logging platform |
+
+---
+
+### Application 
+
+| Output Layer | How It Is Used |
+|---|---|
+| **Console** | RPi scanner prints a timestamped summary to the terminal on every scan cycle — device count, new/unknown devices flagged, SenseHAT readings, broker connection status |
+| **Web App / Dashboard** | Flask multi-page web app deployed to Render: `index.html` (live device list), `environment.html` (SenseHAT + OpenWeatherMap history and charts), `alerts.html` (alert log with Cloudinary snapshots), `settings.html` (configurable thresholds and whitelist) |
+| **Blynk Mobile App / Web Dash** | Live Blynk dashboard on the homeowner's phone: temperature gauge, humidity gauge, active device count, alert notification widget, and an LED indicator that mirrors the SenseHAT matrix state |
+| **DB log / history** | All events, alerts, snapshots, and environmental readings persisted to SQLite via Flask-SQLAlchemy; queryable by date range, device, or alert type; exportable as CSV from the dashboard |
+| **Alerts / Notifications** | SendGrid email alert with Cloudinary camera snapshot attached; Telegram Bot push message with photo; Blynk in-app notification — three independent alert channels firing on the same trigger |
+| **Device-based (SenseHAT LED matrix)** | SenseHAT LED matrix displays system state in real time: steady green (network clear), flashing amber (new device seen), flashing red (unknown device alert), solid blue (system starting up / broker connecting) |
+| **ThingSpeak Web Dashboard** | Long-term IoT data logging platform — SenseHAT temperature, humidity, and device count published to ThingSpeak channel fields every 30 seconds; 
+   MATLAB-powered charts visualise historical trends, daily averages, and anomaly spikes directly on the ThingSpeak web dashboard |
+
+---
+
+Feedback teacher:
+
+I like the use of networking in it. You have a lot going on in it(Camera, Rest API, 2 IoT platforms, DB, DevOps). 
+You could reduce the scope somewhat and still get an excellent result. 
+Break it into 2-3  "Sprints" with the 1st 2  sprints focused on the core functionality - unknown device detection/notification. 
+And maybe put other "stretch" goals in sprint 3 (for instance Java API?).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
