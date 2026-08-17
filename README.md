@@ -221,4 +221,4 @@ Both MQTT and REST run in parallel — REST for cloud logging and alerts, MQTT f
   
 
 ## Author
-Boun Chun - HDip Computer Science — Computer Systems & Networks
+Boun Chun 
